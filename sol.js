@@ -64,10 +64,6 @@
 
                     this.$selectionContainer
                         .css('left', $('.col-city').offset().left - this.$container.offset().left )
-                    $('#closeSelect').click(function(event) {
-                        $('.sol-container').removeClass('sol-active')
-                        $('.displayKeyword').css('display', 'none')
-                    });
                 },
                 onRendered: undefined,
                 onOpen: function() {
@@ -838,8 +834,14 @@
                 .attr('title', solOptiongroup.tooltip)
                 .html(solOptiongroup.label),
 
+                $closetag = $("<span id='closeSelect'>×</span>")
+                .click(function(){
+                $('.sol-container').removeClass('sol-active')
+                $('.displayKeyword').css('display', 'none')
+                })
+                
                 $groupItem = $('<div class="sol-optiongroup"/>').append($groupCaption,
-                    "<span id='closeSelect'>×</span>");
+                    $closetag);
 
             if (solOptiongroup.disabled) {
                 $groupItem.addClass('disabled');
