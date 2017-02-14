@@ -487,9 +487,6 @@ input::placeholder {
 .sol-container.sol_active .sol-selection-container {
     width: 580px;
     margin-top: 45px;
-    border-bottom: none;
-    /*        position: absolute;
-        top: 45px;*/
 }
 
 .col-area .sol-optiongroup {
