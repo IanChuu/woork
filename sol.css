@@ -418,7 +418,7 @@
 }
 
 .displayKeyword {
-    display:none;
+    display: none;
 }
 
 .keywordBar {
@@ -445,6 +445,7 @@ input::placeholder {
     float: left;
     margin-right: 25px;
 }
+
 .col-more {
     width: 95px;
     float: left;
@@ -464,6 +465,11 @@ input::placeholder {
 .col-more .sol-input-container {
     right: 0;
 }
+
+.col-more .sol-caret-container {
+    display: none;
+}
+
 .sol-caret-container .sol-caret {
     top: 50%;
     left: 50%;
@@ -561,6 +567,7 @@ input::placeholder {
     margin-left: 20px;
     width: 60px;
 }
-#tagDelete {    
-cursor:pointer;
+
+#tagDelete {
+    cursor: pointer;
 }
