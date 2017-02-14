@@ -464,10 +464,6 @@ input::placeholder {
 .col-more .sol-input-container {
     right: 0;
 }
-
-.col-more .sol-caret-container {
-    display: none;
-}
 .sol-caret-container .sol-caret {
     top: 50%;
     left: 50%;
