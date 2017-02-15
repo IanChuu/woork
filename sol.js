@@ -888,6 +888,8 @@
                 var self = this;
                 this.$originalElement.find('option').each(function(index, item) {
                     var $currentOriginalOption = $(item);
+                    //test
+                    alert(self.$originalElement.val())
                     if ($currentOriginalOption.val() === $changeItem.val()) {
                         $currentOriginalOption.prop('selected', $changeItem.prop('checked'));
                         self.$originalElement.trigger('change');
