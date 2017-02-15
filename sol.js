@@ -138,12 +138,12 @@
                         }
                     }
 
-                    // this.$selectionContainer
-                    //     // .css('top', Math.floor(selectionContainerYPos))
-                    //     // .css('top', Math.floor(selectionContainerYPos)+15)
-                    //     // .css('left', Math.floor(this.$container.offset().left))
-                    //     // .css('width', selectionContainerWidth);
-                    //     .css('left', $('.col-city').offset().left - this.$container.offset().left )
+                    this.$selectionContainer
+                        // .css('top', Math.floor(selectionContainerYPos))
+                        // .css('top', Math.floor(selectionContainerYPos)+15)
+                        // .css('left', Math.floor(this.$container.offset().left))
+                        // .css('width', selectionContainerWidth);
+                        .css('left', $('.col-city').offset().left - this.$container.offset().left )
                         // .css('width', 600);
                         // remember the position
                     this.config.displayContainerAboveInput = displayContainerAboveInput;
