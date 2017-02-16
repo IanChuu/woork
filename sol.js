@@ -839,8 +839,7 @@
                 $('.sol-container').removeClass('sol-active')
                 $('.displayKeyword').css('display', 'none')
                 })
-                
-                $groupItem = $('<form><div class="sol-optiongroup"/>').append($groupCaption,
+                $groupItem = $('<div class="sol-optiongroup"/>').wrap('<form></form>').append($groupCaption,
                     $closetag);
 
             if (solOptiongroup.disabled) {
