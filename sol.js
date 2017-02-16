@@ -840,7 +840,7 @@
                 $('.displayKeyword').css('display', 'none')
                 })
                 
-                $groupItem = $('<div class="sol-optiongroup"/>').append('<form>').append($groupCaption,
+                $groupItem = $('<div class="sol-optiongroup"/><form>').append($groupCaption,
                     $closetag);
 
             if (solOptiongroup.disabled) {
