@@ -84,6 +84,7 @@
 }
 
 .sol-caret-container {
+    width: 100%;
     position: absolute;
     display: inline-block;
     width: 25px;
@@ -472,7 +473,7 @@ input::placeholder {
 
 .sol-caret-container .sol-caret {
     top: 50%;
-    left: 50%;
+    left: 90%;
     transform: translate(-50%, -50%);
 }
 
@@ -532,8 +533,9 @@ input::placeholder {
 }
 
 .sol-caret-container {
-    background: #fff;
-    cursor: pointer;
+background: rgba(255, 255, 255, 0); /* browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff'); /* IE */
+cursor: pointer;
 }
 
 #closeSelect {
