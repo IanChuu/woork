@@ -839,7 +839,7 @@
                 $('.sol-container').removeClass('sol-active')
                 $('.displayKeyword').css('display', 'none')
                 }),
-                $form = $('<div class="sol-optiongroup"/>').append('<form>'),
+                $form = $('<div class="sol-optiongroup"/>').wrap('<form>'),
                 //('<div class="sol-optiongroup"/>').wrap('<form>');
                 $groupItem = $form.append($groupCaption,
                     $closetag);
