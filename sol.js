@@ -841,7 +841,7 @@
                 })
 
 
-                $groupItem = $('<form><div class="sol-optiongroup"/>').append($groupCaption,
+                $groupItem = $('<div class="sol-optiongroup"/>').wrap('<form>').append($groupCaption,
                     $closetag);
 
             if (solOptiongroup.disabled) {
