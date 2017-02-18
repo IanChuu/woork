@@ -822,7 +822,7 @@
             $displayElement = $('<div class="sol-option"/>').append($label);
             solOption.displayElement = $displayElement;
 
-            $actualTargetContainer.wrap('<form>').append($displayElement);
+            $actualTargetContainer.append($displayElement);
 
             if (solOption.selected) {
                 this._addSelectionDisplayItem($inputElement);
@@ -839,9 +839,9 @@
                 $('.sol-container').removeClass('sol-active')
                 $('.displayKeyword').css('display', 'none')
                 }),
-
+                $form = $('<div class="sol-optiongroup"/>').append('<form>'),
                 //('<div class="sol-optiongroup"/>').wrap('<form>');
-                $groupItem = $('<div class="sol-optiongroup"/>').append($groupCaption,
+                $groupItem = $form.append($groupCaption,
                     $closetag);
 
             if (solOptiongroup.disabled) {
