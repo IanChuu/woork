@@ -840,7 +840,7 @@
                 $('.displayKeyword').css('display', 'none')
                 }),
 
-                $groupItem = $('<div class="sol-optiongroup"/>').wrapInner('<form>').append($groupCaption,
+                $groupItem = $('<div class="sol-optiongroup"/>').append($groupCaption,
                     $closetag);
 
             if (solOptiongroup.disabled) {
@@ -855,7 +855,7 @@
             }
 
             solOptiongroup.displayElement = $groupItem;
-            this.$selection.append($groupItem);
+            this.$selection.append($groupItem.wrapInner('<form>'));
         },
 
         _initializeSelectAll: function() {
