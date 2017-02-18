@@ -567,10 +567,10 @@ cursor: pointer;
 #tagDelete {
     cursor: pointer;
 }
-.sol-current-selection:nth-child(2) {
+.sol-current-selection:nth-child(3) {
 	display: none;
 }
 
-.col-more .sol-active .sol-current-selection:nth-child(2) {
+.col-more .sol-active .sol-current-selection:nth-child(3) {
 	display: block;
 }
