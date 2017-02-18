@@ -498,11 +498,6 @@ input::placeholder {
     margin-top: 45px;
 }
 
-.col-area .sol-optiongroup {
-    display: none;
-}
-
-
 /*    .col-area .sol-optiongroup:nth-child(1) {
         display: block;
     }*/
