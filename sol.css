@@ -583,3 +583,8 @@ cursor: pointer;
 .col-more .sol-active .searchDiv {
 	display: none;
 }*/
+.col-room {
+    width: 87px;
+    float: left;
+    margin-right: 25px;
+}
