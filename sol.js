@@ -840,7 +840,7 @@
                 $('.displayKeyword').css('display', 'none')
                 }),
 
-                $('<div class="sol-optiongroup"/>').wrap('<form>');
+                //('<div class="sol-optiongroup"/>').wrap('<form>');
                 $groupItem = $('<div class="sol-optiongroup"/>').append($groupCaption,
                     $closetag);
 
