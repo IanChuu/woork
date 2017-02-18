@@ -572,5 +572,9 @@ cursor: pointer;
 }
 
 .col-more .sol-active .sol-current-selection:nth-child(3) {
-	display: block;
+	display: inline-block;
+}
+
+.col-more .sol-active .displayKeyword {
+	display: none;
 }
