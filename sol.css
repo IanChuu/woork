@@ -567,6 +567,7 @@ cursor: pointer;
 #tagDelete {
     cursor: pointer;
 }
+/*
 .sol-current-selection:nth-child(3) {
 	display: none;
 }
@@ -581,4 +582,4 @@ cursor: pointer;
 
 .col-more .sol-active .searchDiv {
 	display: none;
-}
+}*/
