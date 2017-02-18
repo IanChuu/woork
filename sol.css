@@ -571,10 +571,14 @@ cursor: pointer;
 	display: none;
 }
 
+.col-more .sol-active .sol-current-selection) {
+	display: none;
+}
+
 .col-more .sol-active .sol-current-selection:nth-child(3) {
 	display: inline-block;
 }
 
-.col-more .sol-active .displayKeyword {
+.col-more .sol-active .searchDiv {
 	display: none;
 }
