@@ -452,9 +452,12 @@ input::placeholder {
     margin-right: 25px;
     position: relative;
     height: 30px;
-    line-height: 30px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background: #795548;
+    color: white;
+    padding: 0px;
+    text-align: center;
 }
 
 .col-price input::-webkit-input-placeholder {
