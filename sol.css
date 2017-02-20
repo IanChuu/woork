@@ -598,6 +598,7 @@ background: #fff;
 text-align: initial;
 	width:615px;
 	border: 1px solid #ccc;
+	display:none;
 }
 
 .more-container .sol-selection-container {
