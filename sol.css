@@ -479,6 +479,19 @@ width:100%;
     display: none;
 }
 
+.col-more .sol-container::after {
+    content: "";
+    display: block;
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    height: 16px;
+    z-index: 100;
+    border: 1px solid #cccccc;
+    border-bottom: none;
+    top: 28px;
+}
+
 .sol-caret-container .sol-caret {
     top: 50%;
     left: 90%;
