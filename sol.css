@@ -599,11 +599,10 @@ cursor: pointer;
 
 .more-container {
 text-align: initial;
+	width:615px;
 }
 
 .more-container .sol-selection-container {
-width: 615px;
-    margin-top: 45px;
     display: block;
     left: inherit;
     top: inherit;
