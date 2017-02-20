@@ -450,6 +450,11 @@ input::placeholder {
     width: 95px;
     float: left;
     margin-right: 25px;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .col-price input::-webkit-input-placeholder {
