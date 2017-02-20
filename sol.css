@@ -453,6 +453,7 @@ input::placeholder {
 }
 
 .col-more-button {  
+	height: 100%;
 width:100%;
     background: #795548;
     color: white;
@@ -596,6 +597,7 @@ cursor: pointer;
 background: #fff;
 text-align: initial;
 	width:615px;
+	border: 1px solid #ccc;
 }
 
 .more-container .sol-selection-container {
@@ -603,9 +605,6 @@ text-align: initial;
     left: inherit;
     top: inherit;
     z-index: 100;
-    border: 1px solid #ccc;
-    background: #fff;
-    border-radius: 4px;
 }
 .more-container .sol-inner-container {
 display:none;
