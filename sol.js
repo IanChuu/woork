@@ -837,7 +837,7 @@
                 $closetag = $("<span id='closeSelect'>×</span>")
                 .click(function(){
                 $('.sol-container').removeClass('sol-active')
-                $('.displayKeyword').css('display', 'none')
+                //$('.displayKeyword').css('display', 'none')
                 }),
 
                 $groupItem = $('<div class="sol-optiongroup"/>').append($groupCaption,
@@ -1003,11 +1003,11 @@
         toggle: function() {
             if (this.isOpen()) {
                 $('.sol-container').removeClass('sol-active');
-                $('.displayKeyword').css('display', 'none')
+                //$('.displayKeyword').css('display', 'none')
             } else {
                 $('.sol-container').removeClass('sol-active')
                 this.open();
-                $('.displayKeyword').css('display', 'block')
+                //$('.displayKeyword').css('display', 'block')
             }
         },
 
@@ -1099,7 +1099,7 @@
         },
         closeitem: function(event) {
             $('.sol-container').removeClass('sol-active')
-            $('.displayKeyword').css('display', 'none')
+            //$('.displayKeyword').css('display', 'none')
         }
     };
 
