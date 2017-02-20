@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="sol.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="sol.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-city first_select">
+            <div id="my-select"></div>
+        </div>
+        <div class="col-area second_select">
+            <div id="my-select2"></div>
+        </div>
+        <div class="col-type third_select">
+            <div id="my-select3"></div>
+        </div>
+        <div class="col-price forth_select">
+            <div id="my-select4"></div>
+            <div class="sol-option" id="priceInput"><label class="sol-label"><input type="radio" id="priceradio" class="sol-radio" name="價格" item="" value=""><input type="text" class="inputprice" id="pricelow" name="價格" item="" placeholder="最低">-<input type="text" class="inputprice" id="priceheigh" name="價格" item="" placeholder="最高"></label></div>
+        </div>
+        <div class="displayKeyword">
+            <div class="searchDiv">
+                <a class="searchButton" href="javascript:;">找房子</a>
+            </div>
+            <div class="keywordBottom">
+                <span id="print-item">關鍵字:</span>
+            </div>
+        </div>
+        <div class="col-search">
+            <input type="search" name="搜尋" id="searchRun" class="keywordBar" placeholder="輸入關鍵字或房屋編號" value="">
+            <a class="searchButton" href="javascript:;">找房子</a>
+        </div>
+    </div>
+    <div id="run">電梯大樓</div>
+    <script>
+$(document).ready(function () {
+    //alert("${keyword}"+",縣市"+"${region}"+ ",地區"+"${districeCode}"+",類型"+"${objType}"+",價格"+"${price}");
+    //search bar javascript
+    $('html').click(function() {
+        if($('.sol-container').hasClass('sol-active')){
+            removeSelect()
+        }
+    });
+    $('.displayKeyword').click(function(event){
+         event.stopPropagation();
+    });
+
+        $('.searchButton').click(function(event) {
+            $('.selected-readable').empty()
+            $("input:checked").each(function() {
+                var selectText = $(this).parent().text();
+                if($(this).val() != 00) {
+                    $('.selected-readable').append('<span value="'+$(this).val() + '" class="item"><i id="tagDelete" class="fa fa-times"></i> '  + selectText +"</span>")
+                }
+             });
+            if($('.item').length == 0){
+                $('.selected-readable').append('<span>不限</span>')
+            }
+              
+           var city_Checkboxes = new Array();
+           //以name篩選 選取項目value
+            $("input[name=都市]:checked").each(function() {
+               city_Checkboxes.push($(this).val());
+            });
+           var area_Checkboxes = new Array();
+            $("input[name=地區]:checked").each(function() {
+               area_Checkboxes.push($(this).val());
+            });
+           var type_Checkboxes = new Array();
+            $("input[name=居住類型]:checked").each(function() {
+               type_Checkboxes.push($(this).val());
+            });
+           var price_Checkboxes = new Array();
+            $("input[name=價格]:checked").each(function() {
+               price_Checkboxes.push($(this).val());
+            });
+
+            if($('.inputprice').val()!==""){
+                price_Checkboxes = $('#pricelow').val() +"-"+ $('#priceheigh').val()
+            }
+            alert(price_Checkboxes)
+            var square_Checkboxes = new Array();
+            $("input[name=squareradio]:checked").each(function() {
+                square_Checkboxes.push($(this).val());
+            });
+            var room_Checkboxes = new Array();
+            $("input[name=roomradio]:checked").each(function() {
+                room_Checkboxes.push($(this).val());
+            });
+            var adv_Checkboxes = new Array();
+            $("input[name=advradio]:checked").each(function() {
+                adv_Checkboxes.push($(this).val());
+            });
+            
+        var keyword=$("input[name=搜尋]").val();
+        var region=city_Checkboxes;
+        var districeCode=area_Checkboxes;
+        var objType =type_Checkboxes; 
+        var square=square_Checkboxes;
+        var rooms =room_Checkboxes;
+        var price=price_Checkboxes;
+        var advances=adv_Checkboxes;
+        var objlist="";
+        var page ="1";
+        var url ='http://localhost:8080/OfficeSnailHouses/service/api/obj/search?';
+        var urlbar='http://localhost:8080/OfficeSnailHouses/object/list?';
+http://localhost:8080/OfficeSnailHouses/service/api/obj/search?
+        url=url+'keyword='+keyword+'&region='+region+'&districeCode='+districeCode+'&objType='+objType+'&price='+price+'&square='+square+'&rooms='+rooms+'&advances='+advances+'&objlist='+objlist+'&order=modifyDatetime_desc&page='+page;
+        urlbar=urlbar+'keyword='+keyword+'&region='+region+'&districeCode='+districeCode+'&objType='+objType+'&price='+price+'&square='+square+'&rooms='+rooms+'&advances='+advances+'&objlist='+objlist+'&order=modifyDatetime_desc&page='+page;
+        console.log('url ='+url);
+        console.log('彈出頁面:'+urlbar)
+        window.history.pushState("object or string", "Title", urlbar);
+        removeSelect()
+        ancyFun(url,1 ,1)
+        });
+        
+        function appendPrice(){
+            $('.col-price .sol-optiongroup').append($('#priceInput'))
+        }
+        function updateInput(){
+                    var selected = this.$selection.find('input:checked').map(function(i, el) {
+                        return $(this).attr("item");
+                    }).get();
+
+                    // 判斷 select check 數量 印出選項
+                    if (this.$selection.find('input:checked').length > 3) {
+                        this.$container.find('#selectDisplay').attr({
+                            value: this.$selection.find('input:checked').length + '項選擇'
+                        });
+                        // alert("selected = [" + selected + "]\nas string = \"" + selected.join(";") + "\"");
+                    } else {
+                        this.$container.find('#selectDisplay').attr({
+                            value: selected
+                        });
+                    }
+        }
+        function enableButton(){
+            if($(".first_select input[id$='selectDisplay']" ).attr("value")==""){
+                $('.searchButton').addClass('disable_button')
+            }else{
+                $('.searchButton').removeClass('disable_button')
+            }
+        }
+        //關閉選單
+        function removeSelect(){
+            $('.sol-container').removeClass('sol-active')
+            $('.displayKeyword').css('display', 'none')
+        }
+        $('#my-select4').searchableOptionList({
+            data: [
+                {
+                    "type": "optiongroup",
+                    "label": "請選擇價格",
+                    "children": [
+                        { "type": "option", "value": "00", "label": "價格不限","selected":"true"},
+                        { "type": "option", "value": "0-800", "label": "0 - 800 萬"},
+                        { "type": "option", "value": "800-1200", "label": "800 - 1,200 萬"},
+                        { "type": "option", "value": "1200-2000", "label": "1,200 - 2,000 萬"},
+                        { "type": "option", "value": "2000-4000", "label": "2,000 - 4,000 萬"},
+                        { "type": "option", "value": "4000-UP", "label": "4,000 萬以上"},
+                    ]
+                }
+            ],
+            name: "價格",
+            texts: {
+                searchplaceholder: '價格'
+            },            
+            multiple: false,
+            events: {
+                onInitialized: function() {
+                    appendPrice()
+                },
+                onChange: function() {
+                    if($('#col-price input:checked')){
+                        $('#deleteInput').remove();
+                    }
+                    $('#priceInput input').val('');
+                    //print select check 選項
+                    var selected = this.$selection.find('input:checked').map(function(i, el) {
+                        return $(this).attr("item");
+                    }).get();
+                    // 判斷 select check 數量 印出選項
+
+                    if (this.$selection.find('input:checked').length > 0) {
+                        this.$container.find('#selectDisplay:input').attr({
+                            placeholder: selected,
+                            value:selected
+                        });
+                        // alert("selected = [" + selected + "]\nas string = \"" + selected.join(";") + "\"");
+                    } else {
+                        this.$container.find('#selectDisplay:input').attr({
+                            placeholder: '價格',
+                        });
+                    }
+                    enableButton()
+                }
+            }
+        });
+        $('#my-select3').searchableOptionList({
+            data: [
+                {
+                    "type": "optiongroup",
+                    "label": "請選擇類型",
+                    "children": [
+                        { "type": "option", "value": "00", "label": "類型不拘"},
+                        { "type": "option", "value": "電梯大樓", "label": "電梯大樓"},
+                        { "type": "option", "value": "別墅", "label": "別墅"},
+                        { "type": "option", "value": "透天厝", "label": "透天厝"},
+                        { "type": "option", "value": "店面", "label": "店面"},
+                        { "type": "option", "value": "辦公大樓", "label": "辦公大樓"},
+                        { "type": "option", "value": "倉庫", "label": "倉庫"},
+                        { "type": "option", "value": "廠房", "label": "廠房"},
+                        { "type": "option", "value": "住辦", "label": "住辦"},
+                        { "type": "option", "value": "透天厝", "label": "透天厝"},
+                        { "type": "option", "value": "土地", "label": "土地"},
+                        { "type": "option", "value": "其他", "label": "其他"},
+                    ]
+                }
+            ],
+            name: "居住類型",
+            texts: {
+                searchplaceholder: '居住類型'
+            },            
+            events: {
+
+                onChange: function() {
+                    //print select check 選項
+                    var selected = this.$selection.find('input:checked').map(function(i, el) {
+                        return $(this).attr("item");
+                    }).get();
+
+                    // 判斷 select check 數量 印出選項
+                    if (this.$selection.find('input:checked').length > 3) {
+                        this.$container.find('#selectDisplay').attr({
+                            value: this.$selection.find('input:checked').length + '項選擇'
+                        });
+                        // alert("selected = [" + selected + "]\nas string = \"" + selected.join(";") + "\"");
+                    } else {
+                        this.$container.find('#selectDisplay').attr({
+                            value: selected
+                        });
+                    }
+                    enableButton()
+                }
+            }
+        });
+        $('#my-select2').searchableOptionList({
+            data: [
+                {
+                    "type": "optiongroup",
+                    "label": "台北市",
+                    "children": [
+                        { "type": "option", "value": "A01", "label": "中正區"},
+                        { "type": "option", "value": "A05", "label": "大安區"},
+                        { "type": "option", "value": "A03", "label": "中山區"},
+                        { "type": "option", "value": "A07", "label": "信義區"},
+                        { "type": "option", "value": "A04", "label": "松山區"},
+                        { "type": "option", "value": "A02", "label": "大同區"},
+                        { "type": "option", "value": "A10", "label": "內湖區"},
+                        { "type": "option", "value": "A12", "label": "文山區"},
+                        { "type": "option", "value": "A11", "label": "南港區"},
+                        { "type": "option", "value": "A08", "label": "士林區"},
+                        { "type": "option", "value": "A09", "label": "北投區"},
+                        { "type": "option", "value": "A06", "label": "萬華區"}
+                    ]
+                },
+                {
+                    "type": "optiongroup",
+                    "label": "新北市",
+                    "children": [
+                        { "type": "option", "value": "B03", "label": "板橋區"},
+                        { "type": "option", "value": "B11", "label": "新店區"},
+                        { "type": "option", "value": "B20", "label": "三重區"},
+                        { "type": "option", "value": "B14", "label": "永和區"},
+                        { "type": "option", "value": "B21", "label": "新莊區"},
+                        { "type": "option", "value": "B15", "label": "中和區"},
+                        { "type": "option", "value": "B16", "label": "土城區"},
+                        { "type": "option", "value": "B23", "label": "林口區"},
+                        { "type": "option", "value": "B27", "label": "淡水區"},
+                        { "type": "option", "value": "B01,B02,B04,B05,B06,B07,B08,B09,B10,B12,B13,B16,B17,B18,B19,B22,B24,B25,B26,B28,B29", "label": "其他區域"}
+                    ]
+                },
+                {
+                    "type": "optiongroup",
+                    "label": "基隆市",
+                    "children": [
+                        { "type": "option", "value": "C01,C02,C03,C04,C05,C06,C07", "label": "基隆市全區"},
+                    ]
+                }
+            ],
+            name: "地區",
+            texts: {
+                searchplaceholder: '地區'
+            },            
+            events: {
+                onInitialized: function() {
+                    this.$selectionContainer
+                        .css('left', $('.first_select').offset().left - $('.second_select').offset().left)
+                    $('#closeSelect').click(function(event) {
+                    removeSelect()
+                    });
+                },
+                onChange: function() {
+                    //print select check 選項
+                    var selected = this.$selection.find('input:checked').map(function(i, el) {
+                        return $(this).attr("item");
+                    }).get();
+
+                    // 判斷 select check 數量 印出選項
+                    if (this.$selection.find('input:checked').length > 3) {
+                        this.$container.find('#selectDisplay').attr({
+                            value: this.$selection.find('input:checked').length + '項選擇'
+                        });
+                        // alert("selected = [" + selected + "]\nas string = \"" + selected.join(";") + "\"");
+                    } else {
+                        this.$container.find('#selectDisplay').attr({
+                            value: selected
+                        });
+                    }
+                    enableButton()
+                },
+                onOpen: function() {
+                    //判斷 區域displaynone or 都市選項placeholder -> 開啟city選單 
+                    if ($(".first_select input[id$='selectDisplay']" ).attr("value")==null||$(".first_select input[id$='selectDisplay']" ).attr("value")=="") {
+                        $('.sol-container').removeClass('sol-active')
+                        $('.sol-container:eq(0)').addClass('sol-active')
+                        var height = $('.first_select').find('.sol-selection-container').outerHeight() + $('.first_select').find('.sol-selection-container').offset().top;
+                        $('.displayKeyword').css('top', height-3)
+
+                    }
+                    else{
+                    var selectheight = this.$selectionContainer.outerHeight() + this.$selectionContainer.offset().top;
+
+                    $('.displayKeyword').css('top', selectheight-3)
+                    }
+                }
+            }
+        });
+        // 第一個選項操作 
+        $('#my-select').searchableOptionList({
+            data: [
+                {
+                    "type": "optiongroup",
+                    "label": "請選擇縣市",
+                    "children": [
+                        { "type": "option", "value": "A", "label": "台北市"},
+                        { "type": "option", "value": "B", "label": "新北市"},
+                        { "type": "option", "value": "C", "label": "基隆市"}
+                    ]
+                }
+            ],
+            name: "都市",
+            texts: {
+                searchplaceholder: '縣市'
+            },            
+            events: {
+                onInitialized: function() {
+                    this.$selectionContainer
+                        .css('left', 0)
+                    $('#closeSelect').click(function(event) {
+                    removeSelect()
+                    });
+                    $('.sol-selection-container').wrapInner('<div id="display_select"></div>')
+                },
+                onChange: function() {
+                    //print select check 選項
+                    var selected = this.$selection.find('input:checked').map(function(i, el) {
+                        return $(this).attr("item");
+                    }).get();
+                    // 判斷 select check 數量 印出選項
+                    if (this.$selection.find('input:checked').length > 3) {
+                        this.$container.find('#selectDisplay').attr({
+                            value: this.$selection.find('input:checked').length + '項選擇'
+                        });
+                        // alert("selected = [" + selected + "]\nas string = \"" + selected.join(";") + "\"");
+                    } else {
+                        this.$container.find('#selectDisplay').attr({
+                            value: selected
+                        });
+                    }
+                    enableButton()
+                    //獲取列出的item名稱
+                    // var lastitem = $('.first_select').find('.sol-selected-display-item-text').last().text()
+                    var lastitem = $('.sol-current-selection:eq(0)').find('.sol-selected-display-item-text').last().text()
+
+                    if ($('.first_select').find('.sol-container').hasClass('sol-active')) {
+
+                        if (lastitem !== "") {
+                            $('.sol-container').removeClass('sol-active')
+
+                            $('.sol-container:eq(1)').addClass('sol-active')
+                                //篩選是否符合地區
+                            $('.sol-container:eq(1) .sol-optiongroup-label').filter(function() {
+                                return this.innerHTML == lastitem;
+                            }).parent().css('display', 'block')
+                            $('.sol-container:eq(1) .sol-optiongroup-label').filter(function() {
+                                return this.innerHTML !== lastitem;
+                            }).parent().css('display', 'none')
+                            var height = $('.second_select').find('.sol-selection-container').outerHeight() + $('.second_select').find('.sol-selection-container').offset().top;
+                            $('.displayKeyword').css('top', height-3)
+
+                        } else {
+                            $('.sol-container:eq(1) .sol-optiongroup-label').filter(function() {
+                                return this.innerHTML !== lastitem;
+                            }).parent().css('display', 'none')
+                        }
+                    }
+                }
+            }
+        });
+        $('#priceInput').click(function(event) {
+            $('.col-price input:checked').each(function(index, el) {
+                //alert($(this).attr('value'));
+                $(this)
+                    .prop('checked', false)
+                    .trigger('change', true)
+            })
+            $("#priceradio:input:radio")
+                .prop('checked', true)
+                .trigger('change', true)
+            
+
+        });
+          $('#priceInput input').bind('keyup paste', function(){
+                this.value = this.value.replace(/[^0-9]/g, '');
+          });
+
+          // $('#priceInput input').blur(function(event) {
+          //   if($('#pricelow').val()!==""&&$('#priceheigh').val()!==""){
+          //       var a = $('#pricelow').val();
+          //       var b = $('#priceheigh').val();
+          //       var bigger = (a > b) ? a : b;
+          //       var smaller = (a < b) ? a : b;
+          //       console.log(bigger)
+          //       $('#priceheigh').val(bigger)
+          //       $('#pricelow').val(smaller)
+          //   }
+          // })
+        $('#priceheigh,#pricelow').keyup(function() {
+            $('#deleteInput').remove();
+
+            $('.sol-current-selection:last').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">'+$('#pricelow').val()+'-'+$('#priceheigh').val() +'萬</span></div>')
+
+            $('<span class="sol-quick-delete">×</span>')
+            .click(function(event) {
+                $('#priceradio')
+                    .prop('checked', false)
+                    .trigger('change', true);
+                    $('#deleteInput').remove();
+            })
+            .prependTo('#deleteInput')
+        });
+
+        $('#searchRun').click(function(event) {
+        removeSelect()
+        });
+        });
+        $('#run').click(function(event) {
+            var tag = $(this).text()
+            $('input').each(function(index, el) {
+
+                if ($(this).attr('item') == tag) {
+                    alert($(this).attr('item') + "," + tag)
+                    $(this)
+                        .prop('checked', true)
+                        .trigger('change', true);
+                }
+            });
+        });
+    </script>
+</body>
+<style>
+    .inputprice {
+        color:#555;
+        font-weight: 100;
+        margin-left: 20px;
+        width: 60px;
+    }
+</style>
+</html>
