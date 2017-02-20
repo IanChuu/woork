@@ -580,7 +580,7 @@ cursor: pointer;
 	display: none;
 }
 
-.col-more .sol-active .sol-current-selection {
+.col-- .sol-active .sol-current-selection {
 	display: none;
 }
 
@@ -595,6 +595,10 @@ cursor: pointer;
     width: 87px;
     float: left;
     margin-right: 25px;
+}
+
+.more-container {
+text-align: initial;
 }
 
 .more-container .sol-selection-container {
