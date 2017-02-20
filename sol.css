@@ -613,3 +613,6 @@ width: 615px;
     background: #fff;
     border-radius: 4px;
 }
+.more-container .sol-inner-container {
+display:none;
+}
