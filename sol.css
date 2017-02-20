@@ -549,9 +549,9 @@ width:100%;
 }
 
 .sol-caret-container {
-background: rgba(255, 255, 255, 0); /* browsers */
-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff'); /* IE */
-cursor: pointer;
+    background: rgba(255, 255, 255, 0); /* browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4cffffff', endColorstr='#4cffffff'); /* IE */
+    cursor: pointer;
 }
 
 #closeSelect {
@@ -607,11 +607,12 @@ cursor: pointer;
 }*/
 
 .more-container {
-background: #fff;
-text-align: initial;
-	width:615px;
-	border: 1px solid #ccc;
-	display:none;
+    background: #fff;
+    text-align: initial;
+    width:615px;
+    border: 1px solid #ccc;
+    display:none;
+    margin-top: 15px;
 }
 
 .more-container .sol-selection-container {
@@ -621,5 +622,5 @@ text-align: initial;
     z-index: 100;
 }
 .more-container .sol-inner-container {
-display:none;
+    display:none;
 }
