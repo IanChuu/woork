@@ -1001,6 +1001,7 @@
         },
 
         toggle: function() {
+            $('.more-container').hide();
             if (this.isOpen()) {
                 $('.sol-container').removeClass('sol-active');
                 //$('.displayKeyword').css('display', 'none')
