@@ -596,3 +596,16 @@ cursor: pointer;
     float: left;
     margin-right: 25px;
 }
+
+.more-container .sol-selection-container {
+width: 615px;
+    margin-top: 45px;
+    display: block;
+    position: absolute;
+    left: inherit;
+    top: inherit;
+    z-index: 100;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+}
