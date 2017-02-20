@@ -450,6 +450,10 @@ input::placeholder {
     height: 30px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.col-more-button {  
+width:100%;
     background: #795548;
     color: white;
     padding: 0px;
