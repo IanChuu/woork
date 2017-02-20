@@ -1,0 +1,95 @@
+<div id="phone-card" class="phone-card viewport-flip" title="点击翻面">
+	<a href="/" class="list flip out"><span style="background:black">1111111111點</a>
+	<a href="/" class="list flip"><span style="background:blue">02222222222</a>
+</div>
+<style>	
+.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 100ms;
+	animation-timing-function: ease-out;
+	animation-duration: 100ms;
+}
+.out {
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-duration: 100ms;
+	animation-timing-function: ease-in;
+	animation-duration: 100ms;
+}
+.viewport-flip {
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+	position: absolute;
+}
+.flip {
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+	backface-visibility: hidden;
+	transform: translateX(0);
+}
+.flip.out {
+	-webkit-transform: rotateY(-95deg) scale(.9);
+	-webkit-animation-name: flipouttoleft;
+	-webkit-animation-duration: 175ms;
+	transform: rotateY(-95deg) scale(.9);
+	animation-name: flipouttoleft;
+	animation-duration: 175ms;
+}
+.flip.in {
+	-webkit-animation-name: flipintoright;
+	-webkit-animation-duration: 225ms;
+	animation-name: flipintoright;
+	animation-duration: 225ms;
+}
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateX(0); }
+    to { -webkit-transform: rotateX(-90deg) scale(.9); }
+}
+@keyframes flipouttoleft {
+    from { transform: rotateX(0); }
+    to { transform: rotateX(-90deg) scale(.9); }
+}
+@-webkit-keyframes flipintoright {
+    from { -webkit-transform: rotateX(90deg) scale(.9); }
+    to { -webkit-transform: rotateX(0); }
+}
+@keyframes flipintoright {
+    from { transform: rotateX(90deg) scale(.9); }
+    to { transform: rotateX(0); }
+}
+.phone-card {
+    width: 200px;
+    height: 282px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.list {
+    position: absolute;
+}</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	var eleBack, eleFront,
+    eleList = $(".list");
+
+var funBackOrFront = function() {
+    eleList.each(function() {
+        if ($(this).hasClass("out")) {
+            eleBack = $(this);
+        } else {
+            eleFront = $(this);
+        }
+    });
+};
+funBackOrFront();
+
+$("#phone-card").bind("click", function() {
+    eleFront.addClass("out").removeClass("in");
+    setTimeout(function() {
+        eleBack.addClass("in").removeClass("out");
+        funBackOrFront();
+    }, 100);
+    return false;
+});
+</script>
