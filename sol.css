@@ -633,3 +633,18 @@ width:100%;
 .more-container .sol-current-selection:nth-child(6),.more-container .sol-current-selection:nth-child(7) {
     display: inline-block;
 }
+
+.more-container .searchDiv {
+    display: none;
+}
+.more-container .displayKeyword {
+    margin-top: 10px;
+}
+
+.more-container #closeSelect {
+    display: none;
+}
+
+.more-container .sol-optiongroup:nth-child(1) #closeSelect {
+    display: block;
+}
