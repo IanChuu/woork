@@ -836,7 +836,8 @@
 
                 $closetag = $("<span id='closeSelect'>×</span>")
                 .click(function(){
-                $('.sol-container').removeClass('sol-active')
+                $('.sol-container').removeClass('sol-active');
+                $('.more-container').hide();
                 //$('.displayKeyword').css('display', 'none')
                 }),
 
