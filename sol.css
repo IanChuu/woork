@@ -625,15 +625,11 @@ width:100%;
 .more-container .sol-inner-container {
     display:none;
 }
-.sol-current-selection:nth-child(5),.sol-current-selection:nth-child(6) {
-    display: none;
-}
 
 .more-container .sol-current-selection {
     display: none;
 }
 
-.more-container .sol-current-selection:nth-child(5) 
-.more-container .sol-current-selection:nth-child(6) {
+.more-container .sol-current-selection:nth-child(6),.more-container .sol-current-selection:nth-child(7) {
     display: inline-block;
 }
