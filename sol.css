@@ -645,6 +645,6 @@ width:100%;
     display: none;
 }
 
-.more-container .sol-optiongroup:nth-child(1) #closeSelect {
+.more-container .col-square #closeSelect {
     display: block;
 }
