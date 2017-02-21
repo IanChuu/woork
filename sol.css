@@ -625,3 +625,15 @@ width:100%;
 .more-container .sol-inner-container {
     display:none;
 }
+.sol-current-selection:nth-child(5),.sol-current-selection:nth-child(6) {
+    display: none;
+}
+
+.col-more .sol-current-selection {
+    display: none;
+}
+
+.col-more .sol-current-selection:nth-child(5) 
+.col-more .sol-current-selection:nth-child(6) {
+    display: inline-block;
+}
