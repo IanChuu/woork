@@ -40,85 +40,6 @@
 
 <!--  <form id="searchForm" name="searchForm" method="post"> -->
 
-       <div id="lcolumn" class="clearfix">
-            <div id="searchBox1" class="clearfix">
-                <p id="miniSearch" class="main-title">好窩快搜</p>
-            </div>
-           
-            <div id="searchBox2" class="clearfix">
-                <label id="searchGroup">
-                    
-                    <input id="keyword" name="keyword" type="text" class="searchText" placeholder="請輸入房屋編號或關鍵字" onkeypress="Search()"/></input>
-                </label>
-                <input class="btn_search" id="search" name="search" type="submit" value="搜尋" onClick="query();"></input>
-                
-            </div>
-            <div id="div_filter_house" class="clearfix">
-              <!-- test end -->
-              <!-- test2 -->
-              <!-- test2 end -->
-              
-              <div class="div_filter clearfix">
-                  <p class="searchHeaderTitle">
-                    <span class="searchHeaderText">坪數</span><br />
-                  </p>
-                  <div class="list-section">
-                  <form id="squareForm">
-                      <label class="radio"><input type="radio" name="squareradio" value="00" checked>不限</label>
-                      <label class="radio"><input type="radio" name="squareradio" value="0-14">0 - 14坪</label>
-              <label class="radio"><input type="radio" name="squareradio" value="15-29">15 - 29坪</label>
-              <label class="radio"><input type="radio" name="squareradio" value="30-UP">30坪以上</label>
-              <label class="radio"><input type="radio" name="squareradio" value="40-UP">40坪以上</label>
-              <label class="radio"><input type="radio" name="squareradio" value="50-UP">50坪以上</label>
-              <label class="radio"><input type="radio" name="squareradio" value="NON"> 
-          </form>     
-               <div class="row">
-                <div class="col-xs-12">
-                  <input type="text" class="form-control" style="width: 60px; display:inline-block; min-height: 30px;" name="squareLow" id="squareLow" placeholder="最低"/>
-                  -   
-                  <input type="text" class="form-control" style="width: 60px; display:inline-block; min-height: 30px;" name="squareTop" id="squareTop" placeholder="最高"/>
-                </div>
-                <a class="btn info-more info-confirm" onclick="squareRangeFun();">確認</a>
-            </div>
-          </label>
-                  </div>
-              </div>
-              
-              <div class="div_filter clearfix">
-                  <p class="searchHeaderTitle">
-                    <span class="searchHeaderText">格局</span><br />
-                  </p>
-                  <div class="list-section">
-                  <form id="roomsForm">                    
-                    <label class="radio"><input type="radio" name="roomradio" value="00" checked>不限</label>
-                    <label class="radio"><input type="radio" name="roomradio" value="1">1房</label>
-            <label class="radio"><input type="radio" name="roomradio" value="2">2房</label>
-            <label class="radio"><input type="radio" name="roomradio" value="3">3房</label>
-            <label class="radio"><input type="radio" name="roomradio" value="4">4房</label>
-            <label class="radio"><input type="radio" name="roomradio" value="5-UP">5房以上</label>
-                  </form>
-                  
-                  </div>
-              </div>      
-              
-              
-              <div class="div_filter clearfix">
-                  <p class="searchHeaderTitle">
-                    <span class="searchHeaderText">進階選項</span><br />
-                  </p>
-                      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#adv">點選展開</button>
-            <div id="adv" class="collapse in">
-            <form id="advForm">
-                 <label class="checkbox_group_2"><input type="checkbox"  name="advradio" data-id="有車位" value="hasParking"  class="advanceValue" data-name="有車位" /> 有車位</label>
-                   <label class="checkbox_group_2"><input type="checkbox"  name="advradio" data-id="有電梯" value="hasElevator" class="advanceValue" data-name="有電梯" /> 有電梯</label>
-                   <!-- <label class="checkbox_group_2"><input type="checkbox" data-id="近捷運" data-name="近捷運" /> 近捷運</label>
-                   <label class="checkbox_group_2"><input type="checkbox" data-id="近學校" data-name="近學校" /> 近學校</label>
-                   <label class="checkbox_group_2"><input type="checkbox" data-id="低公設" data-name="低公設" /> 低公設</label> -->
-            </form>
-            </div>
-              </div> 
-          </div>
-        </div>
 <!--   </form>  -->   
         
         <div id="rcolumn">
@@ -245,14 +166,13 @@ $(document).ready(function() {
                     $('.more-container').hide();
                 }
             });
-            $('.displayKeyword').click(function(event) {
-                event.stopPropagation();
-            });
-            $('.col-more-button').click(function(event) {
+            //more select control
+            $('.col-more').click(function(event) {
                 event.stopPropagation();
             });
             $('.col-more-button').click(function(event) {
               removeSelect()
+              $('#squareInput').appendTo($('.col-square').find('form'))
               $('.displayKeyword').appendTo('.more-container')
               $('.more-container').toggle()
             });
@@ -293,15 +213,29 @@ $(document).ready(function() {
                 $('.selected-readable').empty()
                 $("input:checked").each(function() {
                     var selectText = $(this).parent().text();
-                    if ($(this).val() != 00 && selectText !== "-") {
+                    if ($(this).parent().attr('id')=="inputRange") {
+                      var unit = $(this).attr('unit');
+                        $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + $(this).val() + unit+ "</span>")
+
+                    }else if($(this).val() != 00){
                         $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + selectText + "</span>")
                     }
+                    // if ($(this).val() != 00) {
+                    //     $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + selectText + "</span>")
+                    // }else if($(this).parent().attr('id')=="priceinput"){
+                    //   alert($(this).parent().attr('id'))
+                    // }
                 });
-                if ($('#pricelow').val() || $('#pricelow').val()) {
-                    var selectText = $('#pricelow').val() + "-" + $('#priceheigh').val() + "萬"
-                    var pricerange = $('#pricelow').val() + "-" + $('#priceheigh').val()
-                    $('.selected-readable').append('<span class="item"><i id="inputDelete" class="fa fa-times" value="' + pricerange + '"></i> ' + selectText + "</span>")
-                }
+                // if ($('#pricelow').val() || $('#priceheigh').val()) {
+                //     var selectText = $('#pricelow').val() + "-" + $('#priceheigh').val() + "萬"
+                //     var pricerange = $('#pricelow').val() + "-" + $('#priceheigh').val()
+                //     $('.selected-readable').append('<span class="item"><i id="inputDelete" class="fa fa-times" value="' + pricerange + '"></i> ' + selectText + "</span>")
+                // }
+                // if ($('#squarelow').val() || $('#squareheigh').val()) {
+                //     var selectText = $('#squarelow').val() + "-" + $('#squareheigh').val() + "坪"
+                //     var pricerange = $('#squarelow').val() + "-" + $('#squareheigh').val()
+                //     $('.selected-readable').append('<span class="item"><i id="inputDelete" class="fa fa-times" value="' + pricerange + '"></i> ' + selectText + "</span>")
+                // }
                 addKeyword()
                 if ($('.item').length == 0) {
                     $('.selected-readable').append('<span>不限</span>')
@@ -325,11 +259,11 @@ $(document).ready(function() {
                     price_Checkboxes.push($(this).val());
                 });
                 var square_Checkboxes = new Array();
-                $("input[name=squareradio]:checked").each(function() {
+                $("input[name=坪數]:checked").each(function() {
                     square_Checkboxes.push($(this).val());
                 });
                 var room_Checkboxes = new Array();
-                $("input[name=roomradio]:checked").each(function() {
+                $("input[name=格局]:checked").each(function() {
                     room_Checkboxes.push($(this).val());
                 });
                 var adv_Checkboxes = new Array();
@@ -358,6 +292,80 @@ $(document).ready(function() {
                 removeSelect();
                 ancyFun(url, 1, 1)
             }
+
+            $('#my-select-room').searchableOptionList({
+                data: [{
+                    "type": "optiongroup",
+                    "label": "格局",
+                    "children": [
+                        { "type": "option", "value": "00", "label": "不限","selected": "true" },
+                        { "type": "option", "value": "1", "label": "1房" },
+                        { "type": "option", "value": "2", "label": "2房" },
+                        { "type": "option", "value": "3", "label": "3房" },
+                        { "type": "option", "value": "4", "label": "4房" },
+                        { "type": "option", "value": "5-UP", "label": "5房以上" },
+                    ]
+                }],
+                name: "格局",
+                texts: {
+                    searchplaceholder: '格局'
+                },
+                multiple: false,
+                events: {
+                    onRendered: function() {
+
+                    },
+                    onInitialized: function() {
+                        this.$selectionContainer
+                            .css('left', 0)
+                    },
+                    onChange: function() {
+
+                    },
+                    onScroll: function() {
+                      $('.sol-selection-container').click(function(event){
+                           event.stopPropagation();
+                      });
+                    }
+                }
+            }); 
+
+            $('#my-select-square').searchableOptionList({
+                data: [{
+                    "type": "optiongroup",
+                    "label": "坪數",
+                    "children": [
+                        { "type": "option", "value": "00", "label": "不限" ,"selected": "true"},
+                        { "type": "option", "value": "0-14", "label": "0 - 14坪" },
+                        { "type": "option", "value": "15-29", "label": "15 - 29坪" },
+                        { "type": "option", "value": "30-UP", "label": "30坪以上" },
+                        { "type": "option", "value": "40-UP", "label": "40坪以上" },
+                        { "type": "option", "value": "50-UP", "label": "50坪以上" },
+                    ]
+                }],
+                name: "坪數",
+                texts: {
+                    searchplaceholder: ''
+                },
+                multiple: false,
+                events: {
+                    onRendered: function() {
+
+                    },
+                    onInitialized: function() {
+                        this.$selectionContainer
+                            .css('left', 0)
+                    },
+                    onChange: function() {
+
+                    },
+                    onScroll: function() {
+                      $('.sol-selection-container').click(function(event){
+                           event.stopPropagation();
+                      });
+                    }
+                }
+            });
             $('#my-select4').searchableOptionList({
                 data: [{
                     "type": "optiongroup",
@@ -645,79 +653,6 @@ $(document).ready(function() {
                     }
                 }
             });
-            $('#my-select-square').searchableOptionList({
-                data: [{
-                    "type": "optiongroup",
-                    "label": "坪數",
-                    "children": [
-                        { "type": "option", "value": "00", "label": "不限" ,"selected": "true"},
-                        { "type": "option", "value": "0-14", "label": "0 - 14坪" },
-                        { "type": "option", "value": "15-29", "label": "15 - 29坪" },
-                        { "type": "option", "value": "30-UP", "label": "30坪以上" },
-                        { "type": "option", "value": "40-UP", "label": "40坪以上" },
-                        { "type": "option", "value": "50-UP", "label": "50坪以上" },
-                    ]
-                }],
-                name: "更多",
-                texts: {
-                    searchplaceholder: '更多選項'
-                },
-                multiple: false,
-                events: {
-                    onRendered: function() {
-
-                    },
-                    onInitialized: function() {
-                        this.$selectionContainer
-                            .css('left', 0)
-                    },
-                    onChange: function() {
-
-                    },
-                    onScroll: function() {
-                      $('.sol-selection-container').click(function(event){
-                           event.stopPropagation();
-                      });
-                    }
-                }
-            });
-
-            $('#my-select-room').searchableOptionList({
-                data: [{
-                    "type": "optiongroup",
-                    "label": "格局",
-                    "children": [
-                        { "type": "option", "value": "00", "label": "不限","selected": "true" },
-                        { "type": "option", "value": "1", "label": "1房" },
-                        { "type": "option", "value": "2", "label": "2房" },
-                        { "type": "option", "value": "3", "label": "3房" },
-                        { "type": "option", "value": "4", "label": "4房" },
-                        { "type": "option", "value": "5-UP", "label": "5房以上" },
-                    ]
-                }],
-                name: "更多",
-                texts: {
-                    searchplaceholder: '更多選項'
-                },
-                multiple: false,
-                events: {
-                    onRendered: function() {
-
-                    },
-                    onInitialized: function() {
-                        this.$selectionContainer
-                            .css('left', 0)
-                    },
-                    onChange: function() {
-
-                    },
-                    onScroll: function() {
-                      $('.sol-selection-container').click(function(event){
-                           event.stopPropagation();
-                      });
-                    }
-                }
-            }); 
             // 第一個選項操作 
             $('#my-select').searchableOptionList({
                 data: [{
@@ -825,31 +760,20 @@ $(document).ready(function() {
             });
 
             //價格input click 取消all checked
-            $('#priceInput').click(function(event) {
-                $('.col-price input:checked').each(function(index, el) {
+            $('#priceInput,#squareInput').click(function(event) {
+                $(this).closest('form').find('input:checked').each(function(index, el) {
                     //alert($(this).attr('value'));
                     $(this)
                         .prop('checked', false)
                         .trigger('change', true)
                 })
-                $("#priceradio:input:radio")
+                $(this).find('input:radio')
                     .prop('checked', true)
                     .trigger('change', true)
 
-                $('#deleteInput').remove();
-                $('.sol-current-selection:last').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '-' + $('#priceheigh').val() + '萬</span></div>')
-
-                $('<span class="sol-quick-delete">×</span>')
-                    .click(function(event) {
-                        $('#priceradio')
-                            .prop('checked', false)
-                            .trigger('change', true);
-                        $('#deleteInput').remove();
-                    })
-                    .prependTo('#deleteInput')
             });
             //priceInput 只能keyin 數字
-            $('#priceInput input').bind('keyup paste', function() {
+            $('#priceInput input,#squareInput input').bind('keyup paste', function() {
                 this.value = this.value.replace(/[^0-9]/g, '');
             });
             //priceInput 離開 新增tag
@@ -866,7 +790,7 @@ $(document).ready(function() {
                     $('#pricelow').val(smaller)
 
                     $('#deleteInput').remove();
-                    $('.sol-current-selection:last').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '-' + $('#priceheigh').val() + '萬</span></div>')
+                    $('.sol-current-selection:eq(3)').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '-' + $('#priceheigh').val() + '萬</span></div>')
                     $('<span class="sol-quick-delete">×</span>')
                         .click(function(event) {
                             $('#priceradio')
@@ -888,7 +812,7 @@ $(document).ready(function() {
 
             $('#priceheigh,#pricelow').keyup(function() {
                 $('#deleteInput').remove();
-                $('.sol-current-selection:last').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '-' + $('#priceheigh').val() + '萬</span></div>')
+                $('.sol-current-selection:eq(3)').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '-' + $('#priceheigh').val() + '萬</span></div>')
 
                 $('<span class="sol-quick-delete">×</span>')
                     .click(function(event) {
@@ -898,9 +822,50 @@ $(document).ready(function() {
                         $('#deleteInput').remove();
                     })
                     .prependTo('#deleteInput')
-
             });
+            //squareInput 離開 新增tag
+            $('#squareInput input').blur(function(event) {
+                if ($('#squarelow').val() !== "" && $('#squareheigh').val() !== "") {
+                    var a = Number($('#squarelow').val());
+                    var b = Number($('#squareheigh').val());
+                    //比大小 跑第二次之後會卡在第一次判斷哪邊比較大
+                    var bigger = (a > b) ? a : b;
+                    var smaller = (a < b) ? a : b;
+                    console.log(bigger)
 
+                    $('#squareheigh').val(bigger)
+                    $('#squarelow').val(smaller)
+
+                    $('#deleteInput-room').remove();
+                    $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squarelow').val() + '-' + $('#squareheigh').val() + '坪</span></div>')
+                    $('<span class="sol-quick-delete">×</span>')
+                        .click(function(event) {
+                            $('#squarelow')
+                                .prop('checked', false)
+                                .trigger('change', true);
+                            $('#deleteInput-room').remove();
+                        })
+                        .prependTo('#deleteInput-room')
+                }
+
+                $('#squareradio').attr({
+                    value: $('#squarelow').val() + "-" + $('#squareheigh').val()
+                });
+            })
+
+            $('#squareheigh,#squarelow').keyup(function() {
+                $('#deleteInput-room').remove();
+                $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squarelow').val() + '-' + $('#squareheigh').val() + '坪</span></div>')
+
+                $('<span class="sol-quick-delete">×</span>')
+                    .click(function(event) {
+                        $('#squarelow')
+                            .prop('checked', false)
+                            .trigger('change', true);
+                        $('#deleteInput-room').remove();
+                    })
+                    .prependTo('#deleteInput-room')
+            });
             $('#searchRun').click(function(event) {
                 removeSelect()
             });
@@ -964,6 +929,7 @@ $(document).ready(function() {
                         });
                     }
                 });
+
                 search()
                     //alert($(this).parent().text)
                 $('#deleteInput').remove();
@@ -1125,7 +1091,7 @@ $(document).ready(function() {
       }
       }
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -1144,7 +1110,7 @@ $(document).ready(function() {
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -1308,7 +1274,7 @@ $("#locA :checkbox").change(function(e){
       }
       console.log('test 2 localsubA' );
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -1327,7 +1293,7 @@ $("#locA :checkbox").change(function(e){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -1459,7 +1425,7 @@ $("#locA :checkbox").change(function(e){
       }
       }
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -1478,7 +1444,7 @@ $("#locA :checkbox").change(function(e){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -1639,7 +1605,7 @@ $("#locB :checkbox").change(function(e){
       }
       }
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -1658,7 +1624,7 @@ $("#locB :checkbox").change(function(e){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -1795,7 +1761,7 @@ $('#checkRegionC').click(function() {
       }
       }
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -1814,7 +1780,7 @@ $('#checkRegionC').click(function() {
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -1977,7 +1943,7 @@ $("#objectType :checkbox").change(function(e){
     }
     }
     //坪數
-    square =$('input[name="squareradio"]:checked', '#squareForm').val();
+    square =$('input[name="squarelow"]:checked', '#squareForm').val();
     if(square=== undefined){
       square='';
     }if(square =='NON'){
@@ -1996,7 +1962,7 @@ $("#objectType :checkbox").change(function(e){
       square=square;
     } 
     //格局
-    rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+    rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
     if(rooms=== undefined){
       rooms='';
     }
@@ -2134,7 +2100,7 @@ $("#objectType :checkbox").change(function(e){
       }
 
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -2153,7 +2119,7 @@ $("#objectType :checkbox").change(function(e){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }   
@@ -2176,11 +2142,11 @@ $("#objectType :checkbox").change(function(e){
     });
 
 
-//space squareradio
+//space squarelow
 
- $('input:radio[name=squareradio]').change(function() {
+ $('input:radio[name=squarelow]').change(function() {
    
-   console.log('squareradio ='+this.value);
+   console.log('squarelow ='+this.value);
        
     var keyword=  $('input[name="keyword"]').val();
     var region='';
@@ -2310,7 +2276,7 @@ $("#objectType :checkbox").change(function(e){
       }
 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }
@@ -2346,11 +2312,11 @@ $("#objectType :checkbox").change(function(e){
     });
 
 
-//rooms roomradio格局
+//rooms squarelow格局
 
-$('input:radio[name=roomradio]').change(function() {
+$('input:radio[name=squarelow]').change(function() {
    
-   console.log('squareradio ='+this.value);
+   console.log('squarelow ='+this.value);
        
     var keyword=  $('input[name="keyword"]').val();
     var region='';
@@ -2468,7 +2434,7 @@ $('input:radio[name=roomradio]').change(function() {
         }
         }
         //坪數
-        square =$('input[name="squareradio"]:checked', '#squareForm').val();
+        square =$('input[name="squarelow"]:checked', '#squareForm').val();
         if(square=== undefined){
           square='';
         }if(square =='NON'){
@@ -2645,7 +2611,7 @@ $("#adv :checkbox").change(function(e){
     }
     }
     //坪數
-    square =$('input[name="squareradio"]:checked', '#squareForm').val();
+    square =$('input[name="squarelow"]:checked', '#squareForm').val();
     if(square=== undefined){
       square='';
     }if(square =='NON'){
@@ -2664,7 +2630,7 @@ $("#adv :checkbox").change(function(e){
       square=square;
     } 
     //格局
-    rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+    rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
     if(rooms=== undefined){
       rooms='';
     }
@@ -2824,7 +2790,7 @@ $('#orderSelect').change(function() {
     }
     }
     //坪數
-    square =$('input[name="squareradio"]:checked', '#squareForm').val();
+    square =$('input[name="squarelow"]:checked', '#squareForm').val();
     if(square=== undefined){
       square='';
     }if(square =='NON'){
@@ -2843,7 +2809,7 @@ $('#orderSelect').change(function() {
       square=square;
     } 
     //格局
-    rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+    rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
     if(rooms=== undefined){
       rooms='';
     }
@@ -2987,7 +2953,7 @@ function query(){
       
 
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -3006,7 +2972,7 @@ function query(){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }   
@@ -3130,7 +3096,7 @@ function Search(e){
       
 
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -3149,7 +3115,7 @@ function Search(e){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }   
@@ -3591,7 +3557,7 @@ function priceRangeFun(){
       
 
       //坪數
-      square =$('input[name="squareradio"]:checked', '#squareForm').val();
+      square =$('input[name="squarelow"]:checked', '#squareForm').val();
       if(square=== undefined){
         square='';
       }if(square =='NON'){
@@ -3610,7 +3576,7 @@ function priceRangeFun(){
         square=square;
       } 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }   
@@ -3743,7 +3709,7 @@ function squareRangeFun(){
 
 
       //格局
-      rooms =$('input[name="roomradio"]:checked', '#roomsForm').val();
+      rooms =$('input[name="squarelow"]:checked', '#roomsForm').val();
       if(rooms=== undefined){
         rooms='';
       }   
@@ -3764,7 +3730,7 @@ function squareRangeFun(){
     ancyFun(url,1,1);
     $("#orderSelect").attr("value",'modifyDatetime_desc');
   
-    $('input:radio[name="squareradio"][value="NON"]').prop('checked', true);
+    $('input:radio[name="squarelow"][value="NON"]').prop('checked', true);
   
 }
 

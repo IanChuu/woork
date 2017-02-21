@@ -193,26 +193,38 @@ function callApplyObj() {
                         <div id="my-select3"></div>
                     </div>
                     <div class="col-price">
-                        <div id="my-select4"></div>
-                        <div class="sol-option" id="priceInput" style="display:none;"><label class="sol-label"><input type="radio" id="priceradio" class="sol-radio" name="價格" item="" value=""><input type="text" class="inputprice" id="pricelow" name="價格" item="" placeholder="最低">-<input type="text" class="inputprice" id="priceheigh" name="價格" item="" placeholder="最高"></label></div>
-                    </div>
-                    <div class="col-more">更多選項</div>
-                    <div class="more-container">
-                      <div class="col-square">
-                          <div id="my-select-more"></div>
-                      </div>
-                      <div class="col-room">
-                          <div id="my-select-room"></div>
+                      <div id="my-select4"></div>
+                      <div class="sol-option" id="priceInput" style="display:none;">
+                          <label class="sol-label" id='inputRange'>
+                              <input type="radio" unit="萬" id="priceradio" class="sol-radio" name="價格" item="" value="">
+                              <input type="text" class="inputprice" id="pricelow" name="價格" item="" placeholder="最低">-<input type="text" class="inputprice" id="priceheigh" name="價格" item="" placeholder="最高">
+                          </label>
                       </div>
                     </div>
-                    
-                    <div class="displayKeyword">
-                        <div class="searchDiv">
-                            <a class="searchButton" href="javascript:;">找房子</a>
-                        </div>
-                        <div class="keywordBottom">
-                            <span id="print-item">關鍵字:</span>
-                        </div>
+                    <div class="col-more">
+                      <div class="col-more-button">更多選項</div>
+                      <div class="more-container">
+                          <div class="col-square">
+                              <div id="my-select-square"></div>
+                              <div class="sol-option" id="squareInput">
+                                <label class="sol-label" id='inputRange'>
+                                  <input type="radio" unit="坪" id="squareradio" class="sol-radio" name="坪數" item="" value="">
+                                  <input type="text" class="inputsquare" id="squarelow" name="坪數" item="" placeholder="最低">-<input type="text" class="inputsquare" id="squareheigh" name="坪數" item="" placeholder="最高">
+                                </label>
+                              </div>
+                          </div>
+                          <div class="col-room">
+                              <div id="my-select-room"></div>
+                          </div>
+                          <div class="displayKeyword">
+                              <div class="searchDiv">
+                                  <a class="searchButton" href="javascript:;">找房子</a>
+                              </div>
+                              <div class="keywordBottom">
+                                  <span id="print-item">關鍵字:</span>
+                              </div>
+                          </div>
+                      </div>
                     </div>
                     <div class="col-search">
                   <input type="search" name="搜尋" id="searchRun" class="keywordBar" placeholder="輸入關鍵字或房屋編號" value="">
