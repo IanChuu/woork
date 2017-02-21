@@ -453,7 +453,7 @@ input::placeholder {
 }
 
 .col-more-button {  
-	height: 100%;
+    height: 100%;
 width:100%;
     background: #795548;
     color: white;
@@ -579,7 +579,7 @@ width:100%;
     transition: 0.5s;
 }
 
-.inputprice,.inputroom {
+.inputprice,.inputsquare {
     color: #555;
     font-weight: 100;
     margin-left: 20px;
@@ -592,19 +592,19 @@ width:100%;
 }
 /*
 .sol-current-selection:nth-child(3) {
-	display: none;
+    display: none;
 }
 
 .col-- .sol-active .sol-current-selection {
-	display: none;
+    display: none;
 }
 
 .col-more .sol-active .sol-current-selection:nth-child(3) {
-	display: inline-block;
+    display: inline-block;
 }
 
 .col-more .sol-active .searchDiv {
-	display: none;
+    display: none;
 }*/
 
 .more-container {
