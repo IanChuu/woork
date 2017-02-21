@@ -629,11 +629,11 @@ width:100%;
     display: none;
 }
 
-.col-more .sol-current-selection {
+.more-container .sol-current-selection {
     display: none;
 }
 
-.col-more .sol-current-selection:nth-child(5) 
-.col-more .sol-current-selection:nth-child(6) {
+.more-container .sol-current-selection:nth-child(5) 
+.more-container .sol-current-selection:nth-child(6) {
     display: inline-block;
 }
