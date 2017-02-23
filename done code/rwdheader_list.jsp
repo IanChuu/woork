@@ -196,7 +196,7 @@ function callApplyObj() {
                       <div id="my-select4"></div>
                       <div class="sol-option" id="priceInput" style="display:none;">
                           <label class="sol-label" id='inputRange'>
-                              <input type="radio" unit="萬" id="priceradio" class="sol-radio" name="價格" item="" value="">
+                              <input type="radio" tag="price" unit="萬" id="priceradio" class="sol-radio" name="價格" item="" value="">
                               <input type="text" class="inputprice" id="pricelow" name="價格" item="" placeholder="最低">-<input type="text" class="inputprice" id="priceheigh" name="價格" item="" placeholder="最高">
                           </label>
                       </div>
@@ -208,7 +208,7 @@ function callApplyObj() {
                               <div id="my-select-square"></div>
                               <div class="sol-option" id="squareInput">
                                 <label class="sol-label" id='inputRange'>
-                                  <input type="radio" unit="坪" id="squareradio" class="sol-radio" name="坪數" item="" value="">
+                                  <input type="radio" tag="square" unit="坪" id="squareradio" class="sol-radio" name="坪數" item="" value="">
                                   <input type="text" class="inputsquare" id="squarelow" name="坪數" item="" placeholder="最低">-<input type="text" class="inputsquare" id="squareheigh" name="坪數" item="" placeholder="最高">
                                 </label>
                               </div>

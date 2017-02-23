@@ -185,7 +185,7 @@ $(document).ready(function() {
             });
             //按鈕失效
             function enableButton() {
-              var selectArea = $(".col-city input[id$='selectDisplay']").attr("value") + $(".col-area input[id$='selectDisplay']").attr("value")
+              var selectArea = $(".col-city input[id$='selectDisplay']").attr("value") + $(".col-area input[id$='selectDisplay']").attr("value") +$('#searchRun').attr("value")
                 if (selectArea.length == 0) {
                     $('.searchButton').addClass('disable_button')
                 } else {
@@ -213,9 +213,19 @@ $(document).ready(function() {
                 $('.selected-readable').empty()
                 $("input:checked").each(function() {
                     var selectText = $(this).parent().text();
+
                     if ($(this).parent().attr('id')=="inputRange") {
+                      var tagname = 'inputTag'+$(this).attr('tag');
                       var unit = $(this).attr('unit');
-                        $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + $(this).val() + unit+ "</span>")
+                      var value = $(this).val()
+                      if($(this).val().includes('ge')){
+                      var value = parseInt($(this).val())
+                      var unit = $(this).attr('unit') + "以上"
+                      }else if($(this).val().includes('le')){
+                      var value = parseInt($(this).val())
+                      var unit = $(this).attr('unit') + "以下"
+                      }
+                        $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times '+tagname+'" value="' + $(this).val() + '"></i> ' + value + unit+ "</span>")
 
                     }else if($(this).val() != 00){
                         $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + selectText + "</span>")
@@ -258,10 +268,12 @@ $(document).ready(function() {
                 $("input[name=價格]:checked").each(function() {
                     price_Checkboxes.push($(this).val());
                 });
+
                 var square_Checkboxes = new Array();
                 $("input[name=坪數]:checked").each(function() {
                     square_Checkboxes.push($(this).val());
                 });
+
                 var room_Checkboxes = new Array();
                 $("input[name=格局]:checked").each(function() {
                     room_Checkboxes.push($(this).val());
@@ -278,6 +290,7 @@ $(document).ready(function() {
                 var square = square_Checkboxes;
                 var rooms = room_Checkboxes;
                 var price = price_Checkboxes;
+                alert(jQuery.type(price))
                 var advances = adv_Checkboxes;
                 var objlist = "";
                 var page = "1";
@@ -298,7 +311,7 @@ $(document).ready(function() {
                     "type": "optiongroup",
                     "label": "格局",
                     "children": [
-                        { "type": "option", "value": "00", "label": "不限","selected": "true" },
+                        { "type": "option", "value": "00", "label": "格局不限","selected": "true" },
                         { "type": "option", "value": "1", "label": "1房" },
                         { "type": "option", "value": "2", "label": "2房" },
                         { "type": "option", "value": "3", "label": "3房" },
@@ -320,7 +333,11 @@ $(document).ready(function() {
                             .css('left', 0)
                     },
                     onChange: function() {
-
+                        if($('.col-room input:checked').length==0){
+                          $('.col-room input:first')
+                              .prop('checked', true)
+                              .trigger('change', true)
+                        }
                     },
                     onScroll: function() {
                       $('.sol-selection-container').click(function(event){
@@ -335,7 +352,7 @@ $(document).ready(function() {
                     "type": "optiongroup",
                     "label": "坪數",
                     "children": [
-                        { "type": "option", "value": "00", "label": "不限" ,"selected": "true"},
+                        { "type": "option", "value": "00", "label": "坪數不限" ,"selected": "true"},
                         { "type": "option", "value": "0-14", "label": "0 - 14坪" },
                         { "type": "option", "value": "15-29", "label": "15 - 29坪" },
                         { "type": "option", "value": "30-UP", "label": "30坪以上" },
@@ -357,7 +374,14 @@ $(document).ready(function() {
                             .css('left', 0)
                     },
                     onChange: function() {
-
+                        if($('.col-square input:checked').length==0){
+                          $('.col-square input:first')
+                              .prop('checked', true)
+                              .trigger('change', true)
+                        }
+                        $('#deleteInput-room').remove();
+                        enableButton()
+                        $('#squarelow,#squareheigh').val('')
                     },
                     onScroll: function() {
                       $('.sol-selection-container').click(function(event){
@@ -390,11 +414,12 @@ $(document).ready(function() {
                     },
                     onInitialized: function() {
                         appendPrice()
-
                         if ('${price}' !== "" && '${price}' !== '00') {
+                        $("input[name=價格]:first")
+                            .prop('checked', false)
+                            .trigger('change', true)
                             clearTagText()
                             var price = '${price}'.split(",");
-
                             for (var i = 0; i < price.length; i++) {
                                 $("input[name=價格]").each(function() {
                                     if ($(this).val() == price[i]) {
@@ -407,6 +432,12 @@ $(document).ready(function() {
                                         $('.selected-readable').append('<span class="item"><i id="tagDelete" class="fa fa-times" value="' + $(this).val() + '"></i> ' + selectText + "</span>")
                                     }
                                 });
+                            }
+                            if($("input[name=價格]:checked").length !== price.length){
+                                $('#priceradio')
+                                    .prop('checked', true)
+                                    .trigger('change', true)
+                                    .attr({value: '${price}'});
                             }
                         }
 
@@ -423,6 +454,11 @@ $(document).ready(function() {
                         }
                     },
                     onChange: function() {
+                        if($('.col-price input:checked').length==0){
+                          $('.col-price input:first')
+                              .prop('checked', true)
+                              .trigger('change', true)
+                        }
                         $('#deleteInput').remove();
                         //print select check 選項
                         var selected = this.$selection.find('input:checked').map(function(i, el) {
@@ -778,7 +814,7 @@ $(document).ready(function() {
             });
             //priceInput 離開 新增tag
             $('#priceInput input').blur(function(event) {
-                if ($('#pricelow').val() !== "" && $('#priceheigh').val() !== "") {
+                if ($('#pricelow').val()!=="" && $('#priceheigh').val()!=="") {
                     var a = Number($('#pricelow').val());
                     var b = Number($('#priceheigh').val());
                     //比大小 跑第二次之後會卡在第一次判斷哪邊比較大
@@ -800,14 +836,22 @@ $(document).ready(function() {
                         })
                         .prependTo('#deleteInput')
                 }
-
-
-                $('.col-price').find('#selectDisplay:input').attr({
-                    value: $('#pricelow').val() + "-" + $('#priceheigh').val() + " 萬"
-                });
                 $('#priceradio').attr({
                     value: $('#pricelow').val() + "-" + $('#priceheigh').val()
                 });
+                if($('#pricelow').val()==""&& $('#priceheigh').val()!==""){
+                    var priceRange =  $('#priceheigh').val()+"le";
+                    $('#priceradio').attr({value: priceRange});
+                    $('#deleteInput').remove();
+                    $('.sol-current-selection:eq(3)').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#priceheigh').val() + '萬以下</span></div>')
+                    $('<span class="sol-quick-delete">×</span>')
+                }else if ($('#pricelow').val()!==""&& $('#priceheigh').val()==""){
+                    var priceRange =  $('#pricelow').val()+"ge";
+                    $('#priceradio').attr({value: priceRange});
+                    $('#deleteInput').remove();
+                    $('.sol-current-selection:eq(3)').append('<div id="deleteInput" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#pricelow').val() + '萬以上</span></div>')
+                    $('<span class="sol-quick-delete">×</span>')
+                }
             })
 
             $('#priceheigh,#pricelow').keyup(function() {
@@ -825,7 +869,8 @@ $(document).ready(function() {
             });
             //squareInput 離開 新增tag
             $('#squareInput input').blur(function(event) {
-                if ($('#squarelow').val() !== "" && $('#squareheigh').val() !== "") {
+                //check two input value
+                if ($('#squarelow').val()!=="" && $('#squareheigh').val()!=="") {
                     var a = Number($('#squarelow').val());
                     var b = Number($('#squareheigh').val());
                     //比大小 跑第二次之後會卡在第一次判斷哪邊比較大
@@ -840,20 +885,38 @@ $(document).ready(function() {
                     $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squarelow').val() + '-' + $('#squareheigh').val() + '坪</span></div>')
                     $('<span class="sol-quick-delete">×</span>')
                         .click(function(event) {
-                            $('#squarelow')
+                            $('#squareradio')
                                 .prop('checked', false)
                                 .trigger('change', true);
                             $('#deleteInput-room').remove();
                         })
                         .prependTo('#deleteInput-room')
                 }
-
-                $('#squareradio').attr({
-                    value: $('#squarelow').val() + "-" + $('#squareheigh').val()
-                });
+                    var squareRange = $('#squarelow').val() + '-' + $('#squareheigh').val();
+                    $('#squareradio').attr({value: squareRange});
+                if($('#squarelow').val()==""&& $('#squareheigh').val()!==""){
+                    var squareRange =  $('#squareheigh').val()+"le";
+                    $('#squareradio').attr({value: squareRange});
+                    $('#deleteInput-room').remove();
+                    $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squareheigh').val() + '坪以下</span></div>')
+                    $('<span class="sol-quick-delete">×</span>')
+                }else if ($('#squarelow').val()!==""&& $('#squareheigh').val()==""){
+                    var squareRange =  $('#squarelow').val()+"ge";
+                    $('#squareradio').attr({value: squareRange});
+                    $('#deleteInput-room').remove();
+                    $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squarelow').val() + '坪以上</span></div>')
+                    $('<span class="sol-quick-delete">×</span>')
+                }
             })
 
             $('#squareheigh,#squarelow').keyup(function() {
+                if($('#squarelow').val()==""&& $('#squareheigh').val()!==""){
+                    var squareRange =  $('#squareheigh').val()+"le";
+                    $('#squareradio').attr({value: squareRange});
+                }else if ($('#squarelow').val()!==""&& $('#squareheigh').val()==""){
+                    var squareRange =  $('#squarelow').val()+"ge";
+                    $('#squareradio').attr({value: squareRange});
+                }
                 $('#deleteInput-room').remove();
                 $('.sol-current-selection:eq(5)').append('<div id="deleteInput-room" class="sol-selected-display-item"><span class="sol-selected-display-item-text">' + $('#squarelow').val() + '-' + $('#squareheigh').val() + '坪</span></div>')
 
@@ -866,9 +929,34 @@ $(document).ready(function() {
                     })
                     .prependTo('#deleteInput-room')
             });
+            $('#searchRun').keyup(function(event) {
+                enableButton()
+            });
             $('#searchRun').click(function(event) {
                 removeSelect()
             });
+            //press enter search 
+            $('#searchRun').keypress(function (e) {
+                if (e.which == 13) {
+                    if ($('.searchButton').hasClass('disable_button')) {
+                        alert('please choose 縣市')
+                    } else {
+                        search();
+                    }
+                }
+            });
+            $('#filters').on('click', '.inputTagsquare', function(event) {
+                $('#deleteInput-room').remove()
+                   $('.col-square input:first')
+                    .prop('checked', true)
+                    .trigger('change', true)
+            })
+            $('#filters').on('click', '.inputTagprice', function(event) {
+                $('#deleteInput').remove()
+                   $('.col-square input:first')
+                    .prop('checked', true)
+                    .trigger('change', true)
+            })
             $('#filters').on('click', '#tagDelete', function(event) {
                 //get tagDelete value to check input
                 var tag = ($(this).attr('value'));
@@ -941,7 +1029,7 @@ $(document).ready(function() {
                     $('.selected-readable').empty()
                 }
             }
-
+//載入執行
   if('${keyword}'!==""){
     clearTagText()
     $('.selected-readable').append('<span class="item"><i id="inputDelete" class="fa fa-times" value="'+'${keyword}'+'"></i> 搜尋'+ '${keyword}' +"</span>")
