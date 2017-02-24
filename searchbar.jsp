@@ -17,6 +17,66 @@
 <meta http-equiv="Cache-Control" content="no-cache"> 
 <meta http-equiv="Expires" content="0"> 
 
+<!-- css highlight -->
+<style>
+    .highlight-box {
+        color: #fff;
+    }
+    .highlight-title {
+        padding: 5px 0;
+        border-bottom: 3px solid #fff;
+    }
+    .highlight-title h4 {
+        color: #FDEBA6;
+        font-size: 22px;
+        margin:5px;
+    }
+    .highlight-title p {
+        color: #fff;
+    }
+    .list-item {
+        padding: 10px 10px 5px;
+        text-align: left;
+    }
+    .list-item h3,.list-item p {
+        color: #fff;
+        font-weight: initial;
+        font-size: initial;
+        padding: 1px 0;
+        margin: 0;
+    }
+    .list-item p:last-child {
+        color: #FDEBA6;
+        font-size: 24px;
+        margin: 5px 0;
+        font-weight: 900;
+    }
+
+    .list-item-img {
+        position: relative;
+    }
+    .list-item img {
+        max-width: 100%;
+    }
+    .list-item-img  .highlight-img {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 40%;
+    }
+    .list-item-img .list-tag {
+        padding: 1px 5px;
+        width: initial;
+        height: initial;
+    }
+    .list-item-img .list-price {
+        top: initial;
+        left: initial;
+        bottom: 0;
+        right: 0;
+    }
+</style>
+
 <%@ include file="../common/rwdlibrary_list.jsp" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/buildlists.css"/>">
 <link rel="stylesheet" href="<%=CONSTANT.WEBRESOURCE_URL%>/webresource/office/css/demo.css"/>
@@ -123,6 +183,91 @@
             </section>  
             
         </div>
+    <div id="lcolumn" class="clearfix highlight-box" style="clear: initial">
+        <div class="highlight-title">
+            <h4>超激安 機會價</h4>
+            <p>誠實屋主在這裡，出價就有機會買到</p>
+        </div>
+        <div class="list-highlight">
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-img">
+                    <img src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/18872.jpg" alt="">
+                    <img class="highlight-img" src="https://wr-snailhouse.cdn.hinet.net/webresource/office/img/promo_icon/18788.png">
+                    <span class="list-tag">電梯大樓</span>
+                    <span class="list-tag list-price">開價 1500萬</span>
+                </div>
+                <h3>板橋大智街優雅一樓</h3>
+                <p>總坪數18.74</p>
+                <p>機會價 1480 +</p>
+            </div>
+        </div>
+    </div>
 
 
        <!-- pagination --> 
@@ -3933,7 +4078,8 @@ function squareRangeFun(){
 <%@ include file="../common/ga.jsp"%>
 <style>
 .b_item {
-z-index:10;}
+z-index:10;
+}
 </style>
 </body>
 </html> 
