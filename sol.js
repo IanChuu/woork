@@ -91,7 +91,7 @@
                 onScroll: function() {
                     //選單點及防止收起
                 $('.sol-selection-container').click(function(event){
-                     event.stopPropagation();
+                     //event.stopPropagation();
                 });
                     //計算高度
                     // // sol-inner-container
