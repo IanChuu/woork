@@ -285,7 +285,7 @@
             this.$caret = $('<div class="sol-caret-container"><b class="sol-caret"/></div>').click(function(e) {
                 self.toggle();
                 // e.preventDefault();
-                //event.stopPropagation();
+                event.stopPropagation();
             });
 
             var $inputContainer = $('<div class="sol-input-container"/>').append(this.$input);
