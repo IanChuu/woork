@@ -283,9 +283,12 @@
             this.$xItemsSelected = $('<div class="sol-results-count"/>');
 
             this.$caret = $('<div class="sol-caret-container"><b class="sol-caret"/></div>').click(function(e) {
-                self.toggle();
-                // e.preventDefault();
-                event.stopPropagation();
+//                 self.toggle();
+//                 // e.preventDefault();
+//                 event.stopPropagation();
+ self.toggle();
+  e.preventDefault();
+  return false;
             });
 
             var $inputContainer = $('<div class="sol-input-container"/>').append(this.$input);
