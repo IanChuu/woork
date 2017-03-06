@@ -91,7 +91,7 @@
                 onScroll: function() {
                     //選單點及防止收起
                 $('.sol-selection-container').click(function(event){
-                     //event.stopPropagation();
+                     event.stopPropagation();
                 });
                     //計算高度
                     // // sol-inner-container
@@ -285,7 +285,7 @@
             this.$caret = $('<div class="sol-caret-container"><b class="sol-caret"/></div>').click(function(e) {
                 self.toggle();
                 // e.preventDefault();
-                event.stopPropagation();
+                //event.stopPropagation();
             });
 
             var $inputContainer = $('<div class="sol-input-container"/>').append(this.$input);
